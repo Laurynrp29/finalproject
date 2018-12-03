@@ -1,0 +1,7 @@
+---
+title: "Final Project"
+author: Lauryn Pavlik
+output: html_notebook
+---
+
+

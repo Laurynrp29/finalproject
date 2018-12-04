@@ -55,41 +55,37 @@ ny_data %>%
 
 
 ```
-##Do females tend to have a higher score than males?
+
+There is a slight postive correlation, but nothing too signficant.
+##Let's add more variables and see if there is any correlation between more and new variables.  
 ```{r}
 ny_data %>%
-  ggplot(aes(x= mean, y= district)) + 
-  geom_boxplot() +
-  facet_grid(year ~ sex)
+  ggplot(aes(x= district, y= mean)) + 
+  geom_point() +
+  facet_grid(sex~year)
 
 
 
 ```
+#Judging from the past graph, it seems that females have a slightly higher benchmark score. It is also noticeable that the scores over the districts in the more recent years have less of a postive correlation.These observations bring about two questions: 
 
-
-
-
-
-#Hypothesis test to see if the majority of students are a level 3
+##1.Using a hypothesis test, is there statistically significant evidence that females have higher scores than males? 
 ```{r}
 
 
+
 ```
 
 
-#Introduce Conneticut data set 
+##2. Based on a regression model, what variables influence mean score the most?
+```{r}
 
 
 
-#Play around with it 
 
 
-#Regression model
+```
 
-
-#Tree prediction 
-
-#Build a function? 
 
 
 

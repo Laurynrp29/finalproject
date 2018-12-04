@@ -3,6 +3,10 @@ title: "Final Project"
 author: Lauryn Pavlik
 output: html_notebook
 ---
+#Make sure to explain data sets and variables
+
+
+
 
 #Clean environment and load packages
 ```{r}
@@ -44,10 +48,35 @@ ny_data %>%
 ```
 
 
+#See how the mean changes over the years and by gender
+```{r}
+ny_data %>%
+  mean()
 
 
 
+```
 
+#Hypothesis test to see if the majority of students are a level 3
+```{r}
+
+
+```
+
+
+#Introduce Conneticut data set 
+
+
+
+#Play around with it 
+
+
+#Regression model
+
+
+#Tree prediction 
+
+#Build a function? 
 
 
 

@@ -4,4 +4,54 @@ author: Lauryn Pavlik
 output: html_notebook
 ---
 
-edit again
+#Clean environment and load packages
+```{r}
+#Clean up workspace environment
+rm(list = ls())
+
+#All packages used for the project
+library(mosaic)
+library(tidyr)
+library(DataComputing)
+library(readr)
+library(dplyr)
+
+
+```
+
+#Import first data set and name it 
+```{r}
+library(readr)
+new_york <- read_csv("final decision.csv")
+```
+
+#View and make data table tidy 
+```{r}
+
+new_york %>%
+ dplyr:: filter(Grade!="All Grades")
+```
+
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

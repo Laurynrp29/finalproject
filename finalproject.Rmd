@@ -35,7 +35,7 @@ new_york <- read_csv("final decision.csv")
 ny_data <- 
 new_york %>%
  dplyr:: filter(Grade!="All Grades") %>%
-  rename(district= "District", grade= "Grade", year= "Year", mean = "Mean Scale Score", level_1 = "Level 1 #", level_1_perc = "Level 1 %", level_2 = "Level 2 #", level_2_perc = "Level 2 %",level_3 = "Level 3 #", level_3_perc = "Level 3 %",level_4 = "Level 4 #", level_4_perc = "Level 4 %", students="Number Tested", sex= "Category" )
+  rename(district= "District", grade= "Grade", year= "Year", avg = "Mean Scale Score", level_1 = "Level 1 #", level_1_perc = "Level 1 %", level_2 = "Level 2 #", level_2_perc = "Level 2 %",level_3 = "Level 3 #", level_3_perc = "Level 3 %",level_4 = "Level 4 #", level_4_perc = "Level 4 %", students="Number Tested", sex= "Category" )
   
 ny_data$`Level 3+4 #` <- NULL
 ny_data$`Level 3+4 %` <- NULL
@@ -49,7 +49,7 @@ ny_data$`Level 3+4 %` <- NULL
 ##Does the number of students taking the benchmark increase the average score? 
 ```{r}
 ny_data %>%
-  ggplot(aes(x= students, y= mean)) + 
+  ggplot(aes(x= students, y= avg)) + 
   geom_point(aes(color=sex))
 
 
@@ -60,7 +60,7 @@ There is a slight postive correlation, but nothing too signficant.
 ##Let's add more variables and see if there is any correlation between more and new variables.  
 ```{r}
 ny_data %>%
-  ggplot(aes(x= district, y= mean)) + 
+  ggplot(aes(x= district, y= avg)) + 
   geom_point() +
   facet_grid(sex~year)
 
@@ -78,10 +78,11 @@ m_s<-
 ms_wide <- 
   m_s %>%
 data.frame() %>%
-  spread(key= sex, value=mean)
+  spread(key= sex, value=avg)
 
-mu1 <- ms_wide[[5, na.rm=TRUE]]
-mu2 <- c(ms_wide$Male, na.rm = TRUE)
+
+mu1 <- as.vector(ms_wide$Female)
+mu2 <- as.vector(ms_wide$Male)
 x_bar1 <- mean(ms_wide$Female, na.rm = TRUE)
 x_bar2 <- mean(ms_wide$Male, na.rm = TRUE)
 x_bar <- x_bar1 - x_bar2

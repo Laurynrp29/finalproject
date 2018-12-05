@@ -80,14 +80,16 @@ ms_wide <-
 data.frame() %>%
   spread(key= sex, value=mean)
 
-mean(ms_wide$Female, na.rm = TRUE)
+mu1 <- ms_wide[[5, na.rm=TRUE]]
+mu2 <- c(ms_wide$Male, na.rm = TRUE)
+x_bar1 <- mean(ms_wide$Female, na.rm = TRUE)
+x_bar2 <- mean(ms_wide$Male, na.rm = TRUE)
+x_bar <- x_bar1 - x_bar2
+dif_of_mean <- c(ms_wide$Female, na.rm = TRUE)
 
-mean(ms_wide$Male, na.rm = TRUE)
 
-mu1 <- 
-mu2 <- 
-x_bar1 <- 
-x_bar2 <-
+
+
 
 
 ```

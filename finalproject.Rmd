@@ -14,13 +14,11 @@ output: html_notebook
 rm(list = ls())
 
 #All packages used for the project
-library(mosaic)
 library(tidyr)
-library(DataComputing)
-library(readr)
 library(dplyr)
 library(ggplot2)
 
+library(party)
 
 ```
 
@@ -40,6 +38,7 @@ new_york %>%
 ny_data$`Level 3+4 #` <- NULL
 ny_data$`Level 3+4 %` <- NULL
 
+head(ny_data)
 
 
 
@@ -50,7 +49,10 @@ ny_data$`Level 3+4 %` <- NULL
 ```{r}
 ny_data %>%
   ggplot(aes(x= students, y= avg)) + 
-  geom_point(aes(color=sex))
+  geom_point(aes(color=sex)) +
+  xlab("Number of Students") +
+  ylab("Average Points Scored") +
+  ggtitle("Average Score Overall")
 
 
 
@@ -62,23 +64,26 @@ There is a slight postive correlation, but nothing too signficant.
 ny_data %>%
   ggplot(aes(x= district, y= avg)) + 
   geom_point() +
-  facet_grid(sex~year)
+  facet_grid(sex~year) +
+  xlab("District Number") +
+  ylab("Average Points Scored") +
+  ggtitle("Gender's Average Score Over The Years")
 
 
 
 
 ```
-#Judging from the past graph, it seems that females have a slightly higher benchmark score. It is also noticeable that the scores over the districts in the more recent years have less of a postive correlation.These observations bring about two questions: 
+#Judging from the past graph, it seems that females have a slightly higher benchmark score. It is also noticeable that the scores over the districts in the more recent years have less of a postive correlation.These observations bring about a question: 
 
-##1.Using a hypothesis test, is there statistically significant evidence that females have higher scores than males? 
+## Using a hypothesis test, is there statistically significant evidence that females have higher scores than males? 
 
 ### First, one must 
 ```{r}
-m_s<- 
+no_levels<- 
   ny_data[,1:6]
 
 female <- 
-  m_s %>%
+  no_levels %>%
 data.frame() %>%
   spread(key= sex, value=avg) 
 
@@ -94,7 +99,7 @@ f_score <- female %>%
 
 ```{r}
 male <- 
-  m_s %>%
+  no_levels %>%
 data.frame() %>%
   spread(key= sex, value=avg) 
 
@@ -119,24 +124,18 @@ t.test(mu1, mu2)
 ```
 ### Conclusion: YAY
 
+
+## Based on a regression model, what variables contribute the most to the mean
 ```{r}
 
+avg_mod<-
+  ny_data %>%
+  lm(avg~ level_1 + level_2 + level_3 + level_4, data=.)  
 
 
-```
-
-##2. Based on a regression model, what variables influence mean score the most?
-```{r}
-
-
-
-
+avg_mod$coefficients
 
 ```
-
-
-
-
 
 
 

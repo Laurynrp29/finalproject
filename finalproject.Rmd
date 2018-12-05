@@ -9,7 +9,7 @@ output: html_notebook
 
 
 #Clean environment and load packages
-```{r}
+```{r message=TRUE}
 #Clean up workspace environment
 rm(list = ls())
 
@@ -71,6 +71,8 @@ ny_data %>%
 #Judging from the past graph, it seems that females have a slightly higher benchmark score. It is also noticeable that the scores over the districts in the more recent years have less of a postive correlation.These observations bring about two questions: 
 
 ##1.Using a hypothesis test, is there statistically significant evidence that females have higher scores than males? 
+
+### First, one must 
 ```{r}
 m_s<- 
   ny_data[,1:6]
@@ -85,11 +87,12 @@ female$grade <- NULL
 female$students <- NULL
 female$Male <- NULL
 
-female %>%
-  na.omit(Female) %>%
-  order(year)
+f_score <- female %>%
+  drop_na()
+```
+  
 
-
+```{r}
 male <- 
   m_s %>%
 data.frame() %>%
@@ -100,25 +103,21 @@ male$grade <- NULL
 male$students <- NULL
 male$Female <- NULL
 
-male%>%
-  na.omit(Male) %>%
-  order(year)
+m_score <- male %>%
+  drop_na()
+```
+
+```{r}
+
+mu1 <- as.vector(f_score$Female)
+mu2 <- as.vector(m_score$Male)
 
 
-mu1 <- as.vector(ms_wide$Female)
-mu2 <- as.vector(ms_wide$Male)
-x_bar1 <- mean(ms_wide$Female, na.rm = TRUE)
-x_bar2 <- mean(ms_wide$Male, na.rm = TRUE)
-x_bar <- x_bar1 - x_bar2
-dif_of_mean <- c(ms_wide$Female, na.rm = TRUE)
-
-
-
-
+t.test(mu1, mu2)
 
 
 ```
-
+### Conclusion: YAY
 
 ```{r}
 

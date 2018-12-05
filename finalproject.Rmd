@@ -75,10 +75,34 @@ ny_data %>%
 m_s<- 
   ny_data[,1:6]
 
-ms_wide <- 
+female <- 
   m_s %>%
 data.frame() %>%
-  spread(key= sex, value=avg)
+  spread(key= sex, value=avg) 
+
+female$district <- NULL
+female$grade <- NULL
+female$students <- NULL
+female$Male <- NULL
+
+female %>%
+  na.omit(Female) %>%
+  order(year)
+
+
+male <- 
+  m_s %>%
+data.frame() %>%
+  spread(key= sex, value=avg) 
+
+male$district <- NULL
+male$grade <- NULL
+male$students <- NULL
+male$Female <- NULL
+
+male%>%
+  na.omit(Male) %>%
+  order(year)
 
 
 mu1 <- as.vector(ms_wide$Female)

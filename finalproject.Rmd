@@ -66,18 +66,38 @@ ny_data %>%
 
 
 
+
 ```
 #Judging from the past graph, it seems that females have a slightly higher benchmark score. It is also noticeable that the scores over the districts in the more recent years have less of a postive correlation.These observations bring about two questions: 
 
 ##1.Using a hypothesis test, is there statistically significant evidence that females have higher scores than males? 
 ```{r}
+m_s<- 
+  ny_data[,1:6]
 
+ms_wide <- 
+  m_s %>%
+data.frame() %>%
+  spread(key= sex, value=mean)
 
+mean(ms_wide$Female, na.rm = TRUE)
 
+mean(ms_wide$Male, na.rm = TRUE)
+
+mu1 <- 
+mu2 <- 
+x_bar1 <- 
+x_bar2 <-
 
 
 ```
 
+
+```{r}
+
+
+
+```
 
 ##2. Based on a regression model, what variables influence mean score the most?
 ```{r}

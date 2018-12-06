@@ -8,12 +8,12 @@ The data set that is being used in this analysis is taken from data.gov. This se
 
 
 
-##Clean environment and load packages
-```{r message=TRUE}
-#Clean up workspace environment
+## Clean environment and load packages
+```{r message = FALSE}
+# Clean up workspace environment
 rm(list = ls())
 
-#All packages used for the project
+# All packages used for the project
 library(tidyr)
 library(dplyr)
 library(ggplot2)
@@ -22,24 +22,24 @@ library(rpart)
 
 ```
 
-##Import first data set and name it 
-```{r}
+## Import first data set and name it 
+```{r message = FALSE}
 library(readr)
 New_york <- read_csv("final decision.csv")
 ```
 
-##View and make data table tidy 
+## View and make data table tidy 
 ```{r}
 Ny_data <- 
 New_york %>%
- dplyr:: filter(Grade!="All Grades") %>%
-  rename(district= "District", grade= "Grade", year= "Year", avg = "Mean Scale Score", level_1 = "Level 1 #", level_1_perc = "Level 1 %", level_2 = "Level 2 #", level_2_perc = "Level 2 %",level_3 = "Level 3 #", level_3_perc = "Level 3 %",level_4 = "Level 4 #", level_4_perc = "Level 4 %", students="Number Tested", sex= "Category" )
+ dplyr:: filter(Grade != "All Grades") %>%
+  rename(district = "District", grade = "Grade", year = "Year", avg = "Mean Scale Score", level_1 = "Level 1 #", level_1_perc = "Level 1 %", level_2 = "Level 2 #", level_2_perc = "Level 2 %", level_3 = "Level 3 #", level_3_perc = "Level 3 %", level_4 = "Level 4 #", level_4_perc = "Level 4 %", students = "Number Tested", sex = "Category" )
   
 Ny_data$`Level 3+4 #` <- NULL
 Ny_data$`Level 3+4 %` <- NULL
 
 Ny_data %>%
-  remove(row= "All Grades")
+  remove(row = "All Grades")
 
 head(Ny_data)
 
@@ -47,12 +47,12 @@ head(Ny_data)
 
 ```
 
-##Play around with data and find any correlation
-###Does the number of students taking the benchmark increase the average score? 
+## Play around with data and find any correlation
+### Does the number of students taking the benchmark increase the average score? 
 ```{r}
 Ny_data %>%
-  ggplot(aes(x= students, y= avg)) + 
-  geom_point(aes(color=sex)) +
+  ggplot(aes(x = students, y = avg)) + 
+  geom_point(aes(color = sex)) +
   xlab("Number of Students") +
   ylab("Average Points Scored") +
   ggtitle("Average Score Overall")
@@ -62,12 +62,12 @@ Ny_data %>%
 ```
 
 There is a slight postive correlation, but nothing too signficant.
-###Let's add more variables and see if there is any correlation between more and new variables.  
+### Let's add more variables and see if there is any correlation between more and new variables.  
 ```{r}
-Ny_data %>%
-  ggplot(aes(x= district, y= avg)) + 
+Ny_data %>% 
+  ggplot(aes(x = district, y = avg)) + 
   geom_point() +
-  facet_grid(sex~year) +
+  facet_grid(sex ~ year) +
   xlab("District Number") +
   ylab("Average Points Scored") +
   ggtitle("Gender's Average Score Over The Years")
@@ -76,22 +76,24 @@ Ny_data %>%
 
 
 ```
+
+
 Judging from the past graph, it seems that females have a slightly higher benchmark score. It is also noticeable that the scores over the districts in the more recent years have less of a postive correlation.These observations bring about a question: 
 
 ## Using a hypothesis test, is there statistically significant evidence that females have higher scores than males? 
 
 ### First, one must 
 ```{r}
-No_levels<- 
-  Ny_data[,1:6] 
+No_levels <- 
+  Ny_data[, 1:6] 
 
   
 
 Female <- 
   No_levels %>%
 data.frame() %>%
-  spread(key= sex, value=avg) %>%
-  rename(female="Female")
+  spread(key = sex, value = avg) %>%
+  rename(female = "Female")
   
 Female$district <- NULL
 Female$grade <- NULL
@@ -109,8 +111,8 @@ F_score <- Female %>%
 Male <- 
   No_levels %>%
 data.frame() %>%
-  spread(key= sex, value=avg) %>%
-  rename(male="Male")
+  spread(key = sex, value = avg) %>%
+  rename(male = "Male")
 
 Male$district <- NULL
 Male$grade <- NULL
@@ -134,15 +136,15 @@ t.test(mu1, mu2)
 ### Conclusion: YAY
 
 
-###Based on a regression model, what variables contribute the most to the mean
+### Based on a regression model, what variables contribute the most to the mean
 ```{r}
 
-Avg_mod<-
+Avg_mod <-
   Ny_data %>%
-  lm(students~ level_1_perc + level_2_perc + level_3_perc + level_4_perc, data=.)  
+  lm(students ~ level_1_perc + level_2_perc + level_3_perc + level_4_perc, data = .)  
 
 
-Avg_mod$coefficients
+summary(Avg_mod)
 
 ```
 

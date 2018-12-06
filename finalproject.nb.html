@@ -185,10 +185,10 @@ $(document).ready(function () {
 <h2>Clean environment and load packages</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0NsZWFuIHVwIHdvcmtzcGFjZSBlbnZpcm9ubWVudFxucm0obGlzdCA9IGxzKCkpXG4jQWxsIHBhY2thZ2VzIHVzZWQgZm9yIHRoZSBwcm9qZWN0XG5saWJyYXJ5KHRpZHlyKVxubGlicmFyeShkcGx5cilcbmxpYnJhcnkoZ2dwbG90MilcbmxpYnJhcnkocnBhcnQucGxvdClcbmxpYnJhcnkocnBhcnQpXG5gYGAifQ== -->
-<pre class="r"><code>#Clean up workspace environment
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDbGVhbiB1cCB3b3Jrc3BhY2UgZW52aXJvbm1lbnRcbnJtKGxpc3QgPSBscygpKVxuIyBBbGwgcGFja2FnZXMgdXNlZCBmb3IgdGhlIHByb2plY3RcbmxpYnJhcnkodGlkeXIpXG5saWJyYXJ5KGRwbHlyKVxubGlicmFyeShnZ3Bsb3QyKVxubGlicmFyeShycGFydC5wbG90KVxubGlicmFyeShycGFydClcbmBgYCJ9 -->
+<pre class="r"><code># Clean up workspace environment
 rm(list = ls())
-#All packages used for the project
+# All packages used for the project
 library(tidyr)
 library(dplyr)
 library(ggplot2)
@@ -206,27 +206,6 @@ library(rpart)</code></pre>
 <pre class="r"><code>library(readr)
 New_york &lt;- read_csv(&quot;final decision.csv&quot;)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUGFyc2VkIHdpdGggY29sdW1uIHNwZWNpZmljYXRpb246XG5jb2xzKFxuICBEaXN0cmljdCA9IGNvbF9pbnRlZ2VyKCksXG4gIEdyYWRlID0gY29sX2NoYXJhY3RlcigpLFxuICBZZWFyID0gY29sX2ludGVnZXIoKSxcbiAgQ2F0ZWdvcnkgPSBjb2xfY2hhcmFjdGVyKCksXG4gIGBOdW1iZXIgVGVzdGVkYCA9IGNvbF9pbnRlZ2VyKCksXG4gIGBNZWFuIFNjYWxlIFNjb3JlYCA9IGNvbF9pbnRlZ2VyKCksXG4gIGBMZXZlbCAxICNgID0gY29sX2ludGVnZXIoKSxcbiAgYExldmVsIDEgJWAgPSBjb2xfZG91YmxlKCksXG4gIGBMZXZlbCAyICNgID0gY29sX2ludGVnZXIoKSxcbiAgYExldmVsIDIgJWAgPSBjb2xfZG91YmxlKCksXG4gIGBMZXZlbCAzICNgID0gY29sX2ludGVnZXIoKSxcbiAgYExldmVsIDMgJWAgPSBjb2xfZG91YmxlKCksXG4gIGBMZXZlbCA0ICNgID0gY29sX2ludGVnZXIoKSxcbiAgYExldmVsIDQgJWAgPSBjb2xfZG91YmxlKCksXG4gIGBMZXZlbCAzKzQgI2AgPSBjb2xfaW50ZWdlcigpLFxuICBgTGV2ZWwgMys0ICVgID0gY29sX2RvdWJsZSgpXG4pXG4ifQ== -->
-<pre><code>Parsed with column specification:
-cols(
-  District = col_integer(),
-  Grade = col_character(),
-  Year = col_integer(),
-  Category = col_character(),
-  `Number Tested` = col_integer(),
-  `Mean Scale Score` = col_integer(),
-  `Level 1 #` = col_integer(),
-  `Level 1 %` = col_double(),
-  `Level 2 #` = col_integer(),
-  `Level 2 %` = col_double(),
-  `Level 3 #` = col_integer(),
-  `Level 3 %` = col_double(),
-  `Level 4 #` = col_integer(),
-  `Level 4 %` = col_double(),
-  `Level 3+4 #` = col_integer(),
-  `Level 3+4 %` = col_double()
-)</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 </div>
@@ -234,16 +213,16 @@ cols(
 <h2>View and make data table tidy</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTnlfZGF0YSA8LSBcbk5ld195b3JrICU+JVxuIGRwbHlyOjogZmlsdGVyKEdyYWRlIT1cIkFsbCBHcmFkZXNcIikgJT4lXG4gIHJlbmFtZShkaXN0cmljdD0gXCJEaXN0cmljdFwiLCBncmFkZT0gXCJHcmFkZVwiLCB5ZWFyPSBcIlllYXJcIiwgYXZnID0gXCJNZWFuIFNjYWxlIFNjb3JlXCIsIGxldmVsXzEgPSBcIkxldmVsIDEgI1wiLCBsZXZlbF8xX3BlcmMgPSBcIkxldmVsIDEgJVwiLCBsZXZlbF8yID0gXCJMZXZlbCAyICNcIiwgbGV2ZWxfMl9wZXJjID0gXCJMZXZlbCAyICVcIixsZXZlbF8zID0gXCJMZXZlbCAzICNcIiwgbGV2ZWxfM19wZXJjID0gXCJMZXZlbCAzICVcIixsZXZlbF80ID0gXCJMZXZlbCA0ICNcIiwgbGV2ZWxfNF9wZXJjID0gXCJMZXZlbCA0ICVcIiwgc3R1ZGVudHM9XCJOdW1iZXIgVGVzdGVkXCIsIHNleD0gXCJDYXRlZ29yeVwiIClcbiAgXG5OeV9kYXRhJGBMZXZlbCAzKzQgI2AgPC0gTlVMTFxuTnlfZGF0YSRgTGV2ZWwgMys0ICVgIDwtIE5VTExcbk55X2RhdGEgJT4lXG4gIHJlbW92ZShyb3c9IFwiQWxsIEdyYWRlc1wiKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTnlfZGF0YSA8LSBcbk5ld195b3JrICU+JVxuIGRwbHlyOjogZmlsdGVyKEdyYWRlICE9IFwiQWxsIEdyYWRlc1wiKSAlPiVcbiAgcmVuYW1lKGRpc3RyaWN0ID0gXCJEaXN0cmljdFwiLCBncmFkZSA9IFwiR3JhZGVcIiwgeWVhciA9IFwiWWVhclwiLCBhdmcgPSBcIk1lYW4gU2NhbGUgU2NvcmVcIiwgbGV2ZWxfMSA9IFwiTGV2ZWwgMSAjXCIsIGxldmVsXzFfcGVyYyA9IFwiTGV2ZWwgMSAlXCIsIGxldmVsXzIgPSBcIkxldmVsIDIgI1wiLCBsZXZlbF8yX3BlcmMgPSBcIkxldmVsIDIgJVwiLCBsZXZlbF8zID0gXCJMZXZlbCAzICNcIiwgbGV2ZWxfM19wZXJjID0gXCJMZXZlbCAzICVcIiwgbGV2ZWxfNCA9IFwiTGV2ZWwgNCAjXCIsIGxldmVsXzRfcGVyYyA9IFwiTGV2ZWwgNCAlXCIsIHN0dWRlbnRzID0gXCJOdW1iZXIgVGVzdGVkXCIsIHNleCA9IFwiQ2F0ZWdvcnlcIiApXG4gIFxuTnlfZGF0YSRgTGV2ZWwgMys0ICNgIDwtIE5VTExcbk55X2RhdGEkYExldmVsIDMrNCAlYCA8LSBOVUxMXG5OeV9kYXRhICU+JVxuICByZW1vdmUocm93ID0gXCJBbGwgR3JhZGVzXCIpXG5gYGAifQ== -->
 <pre class="r"><code>Ny_data &lt;- 
 New_york %&gt;%
- dplyr:: filter(Grade!=&quot;All Grades&quot;) %&gt;%
-  rename(district= &quot;District&quot;, grade= &quot;Grade&quot;, year= &quot;Year&quot;, avg = &quot;Mean Scale Score&quot;, level_1 = &quot;Level 1 #&quot;, level_1_perc = &quot;Level 1 %&quot;, level_2 = &quot;Level 2 #&quot;, level_2_perc = &quot;Level 2 %&quot;,level_3 = &quot;Level 3 #&quot;, level_3_perc = &quot;Level 3 %&quot;,level_4 = &quot;Level 4 #&quot;, level_4_perc = &quot;Level 4 %&quot;, students=&quot;Number Tested&quot;, sex= &quot;Category&quot; )
+ dplyr:: filter(Grade != &quot;All Grades&quot;) %&gt;%
+  rename(district = &quot;District&quot;, grade = &quot;Grade&quot;, year = &quot;Year&quot;, avg = &quot;Mean Scale Score&quot;, level_1 = &quot;Level 1 #&quot;, level_1_perc = &quot;Level 1 %&quot;, level_2 = &quot;Level 2 #&quot;, level_2_perc = &quot;Level 2 %&quot;, level_3 = &quot;Level 3 #&quot;, level_3_perc = &quot;Level 3 %&quot;, level_4 = &quot;Level 4 #&quot;, level_4_perc = &quot;Level 4 %&quot;, students = &quot;Number Tested&quot;, sex = &quot;Category&quot; )
   
 Ny_data$`Level 3+4 #` &lt;- NULL
 Ny_data$`Level 3+4 %` &lt;- NULL
 Ny_data %&gt;%
-  remove(row= &quot;All Grades&quot;)</code></pre>
+  remove(row = &quot;All Grades&quot;)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoib2JqZWN0ICdBbGwgR3JhZGVzJyBub3QgZm91bmRcbiJ9 -->
 <pre><code>object 'All Grades' not found</code></pre>
@@ -251,7 +230,7 @@ Ny_data %&gt;%
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGVhZChOeV9kYXRhKVxuYGBgIn0= -->
 <pre class="r"><code>head(Ny_data)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6MTQsIm5yb3ciOjZ9LCJyZGYiOiJINHNJQUFBQUFBQUFCcFdUVDJ2VVFCakdKOGxtdHcyNkZnUXJlS3AvS0FoZDIwMUZQWmxERVN4cXdWUHhVc2RrdW9hbXlUTEoxbnJ6QTNoV0ZBU2hJSGpSa3dlL2cxN1ZqK0RSbzBqcCtrem1uWFFUOXRLQlgrYWRkNTQ4OC8vaDJtYmYyL1FZWXpaelhJdlpEc0tXalkvRldteFcxZnVNT1djUmRNRnAwQzQ3cHpOWDl0T1Avc21DeXIzemcvaEovTkxVM050M3hDNVBCTFZhOTQvamsvVlVvMXAvd0Zmd0Nyd0RyOEdYNDM3N0FMd0hIOEVIOEFsOG50aVRpMkFSeklQellJWlErOVlPTHJ4UjVXMndRUFc1YjZwOEQrYjlzZ1JNbDl1SE9qL2greGlzZzB0Z0JWd0YxeXBmZjdzc3dUTDVMWkRmSXJVdjAzaFhkRDNoZXdoK2c3L2dIeDNobWNyM0x2bXUzOU0rRDE1U3JXY2FiT1I2bkExbWl2R1ZOT2NJUEFKcWo3UEs5NFlXQjlkcGZqZHBmbFdiNmx0Ni9NWmxkTU9FNXpsZEJaUDBJbDd3M3Jia3U2SXBUNUV6OGk0bFo2STRMMlFjRmtZMGtEeXFMc1Z6d1NYRlRpNzJ6VDk1TVlwRVd1U21pKzhOS093a1lrOGtXeXZVUEVYTnJhR1FZVjNTcjB2NlV5UitYZUpQa2F6V0phdGFVbC8zck15ZTljemExYm5ZTC9BWmo4YzRaM2JVRUhleVlSRm5LYVMyZXVadVkzY3QyVWpNalZKbEhTMkZUMGZwenBLL3JJNkE2UXRrN29GRmQ4SEVYVDJtTXlZdjE3eElrUTdpMUd5K20vQW5JcUZHRjJzb2w5QWJ5amcxaCtVaG0vZUtyT0JHNTRWWllqTGw0dGpSZjBhT2tBalZCQUFBIn0= -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibmNvbCI6MTQsIm5yb3ciOjZ9LCJyZGYiOiJINHNJQUFBQUFBQUFCcFdUVDJ2VVFCakdKOGxtdHcyNkZnUXJlS3AvS0FoZDdhYWxlaklIRVN4cXdWUHhVc2RrdW9hbXlUTEoxdmJtQi9Dc0tBaUNJSGpSa3dlL2cxN1ZqK0RSbzBqcCtrem1uWFFUOXRLQlgrYWRkNTQ4OC8vaDdjMit0K2t4eG16bXVCYXpIWVF0R3grTHRkaXNxdmNaYzg0aTZJTFRvRjEyVG1ldTdLY2YvWk1GbFh2bkIvR1QrS1dwdWJmdmlGMmVDR3ExN2gvSEordXBSclgrZ0svZ0pYZ0xYb0V2eC8zMmUvQU9mQVFmd0Nmd2VXSlBMb0pGTUEvT2d4bEM3VnM3dVBCYWxUZkJBdFhudnFueVBaajN5eEl3WFc0ZDZ2eUU3Mk93RGk2QlpYQVZYS3Q4L2UyeUJOZkpiNEg4RnFsOW1jYTdvdXNKMzBQd0cvd0YvK2dJejFTK2Q4bDMvWjcyZWZDQ2FqM1RZQ1BYNDJ3d1U0eXZwRGxINEJGUWU1eFZ2bXRhSEt6Uy9HN1EvS28yMVRmMStJM0w2SVlKejNPNkNpYnBSYnpndlczSmQwVlRuaUpuNUYxS3prUnhYc2c0TEl4b0lIbFVYWW9Ed1NYRlRpNzJ6VDk1TVlwRVd1U21pKzhOS093a1lrOGtXOHZVUEVYTnJhR1FZVjNTcjB2NlV5UitYZUpQa2F6VUpTdGFVbC8zck15ZTljemExYm5Zei9FWmo4YzRaM2JVRUhleVlSRm5LYVMyZXVadVkzY3QyVWpNalZKbEhTMkZUMGZwenRLcU9sR1A2UXRrN29GRmQ4SEVYVDJtTXlZdjE3eElrUTdpMUd5K20vQW5JcUZHRjJzb2w5QWJ5amcxaCtVaG0vZUtyT0JHNTRWWllqTGw0dGpSZjc0czRtalZCQUFBIn0= -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["district"],"name":[1],"type":["int"],"align":["right"]},{"label":["grade"],"name":[2],"type":["chr"],"align":["left"]},{"label":["year"],"name":[3],"type":["int"],"align":["right"]},{"label":["sex"],"name":[4],"type":["chr"],"align":["left"]},{"label":["students"],"name":[5],"type":["int"],"align":["right"]},{"label":["avg"],"name":[6],"type":["int"],"align":["right"]},{"label":["level_1"],"name":[7],"type":["int"],"align":["right"]},{"label":["level_1_perc"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["level_2"],"name":[9],"type":["int"],"align":["right"]},{"label":["level_2_perc"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["level_3"],"name":[11],"type":["int"],"align":["right"]},{"label":["level_3_perc"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["level_4"],"name":[13],"type":["int"],"align":["right"]},{"label":["level_4_perc"],"name":[14],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"3","3":"2006","4":"Female","5":"496","6":"675","7":"34","8":"6.9","9":"96","10":"19.4","11":"252","12":"50.8","13":"114","14":"23.0"},{"1":"1","2":"3","3":"2006","4":"Male","5":"441","6":"672","7":"39","8":"8.8","9":"74","10":"16.8","11":"232","12":"52.6","13":"96","14":"21.8"},{"1":"1","2":"3","3":"2007","4":"Female","5":"406","6":"681","7":"23","8":"5.7","9":"35","10":"8.6","11":"248","12":"61.1","13":"100","14":"24.6"},{"1":"1","2":"3","3":"2007","4":"Male","5":"413","6":"678","7":"24","8":"5.8","9":"49","10":"11.9","11":"250","12":"60.5","13":"90","14":"21.8"},{"1":"1","2":"3","3":"2008","4":"Female","5":"407","6":"686","7":"8","8":"2.0","9":"42","10":"10.3","11":"256","12":"62.9","13":"101","14":"24.8"},{"1":"1","2":"3","3":"2008","4":"Male","5":"437","6":"687","7":"8","8":"1.8","9":"47","10":"10.8","11":"271","12":"62.0","13":"111","14":"25.4"}],"options":{"columns":{"min":{},"max":[10],"total":[14]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
@@ -267,10 +246,10 @@ Ny_data %&gt;%
 <h3>Does the number of students taking the benchmark increase the average score?</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTnlfZGF0YSAlPiVcbiAgZ2dwbG90KGFlcyh4PSBzdHVkZW50cywgeT0gYXZnKSkgKyBcbiAgZ2VvbV9wb2ludChhZXMoY29sb3I9c2V4KSkgK1xuICB4bGFiKFwiTnVtYmVyIG9mIFN0dWRlbnRzXCIpICtcbiAgeWxhYihcIkF2ZXJhZ2UgUG9pbnRzIFNjb3JlZFwiKSArXG4gIGdndGl0bGUoXCJBdmVyYWdlIFNjb3JlIE92ZXJhbGxcIilcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTnlfZGF0YSAlPiVcbiAgZ2dwbG90KGFlcyh4ID0gc3R1ZGVudHMsIHkgPSBhdmcpKSArIFxuICBnZW9tX3BvaW50KGFlcyhjb2xvciA9IHNleCkpICtcbiAgeGxhYihcIk51bWJlciBvZiBTdHVkZW50c1wiKSArXG4gIHlsYWIoXCJBdmVyYWdlIFBvaW50cyBTY29yZWRcIikgK1xuICBnZ3RpdGxlKFwiQXZlcmFnZSBTY29yZSBPdmVyYWxsXCIpXG5gYGAifQ== -->
 <pre class="r"><code>Ny_data %&gt;%
-  ggplot(aes(x= students, y= avg)) + 
-  geom_point(aes(color=sex)) +
+  ggplot(aes(x = students, y = avg)) + 
+  geom_point(aes(color = sex)) +
   xlab(&quot;Number of Students&quot;) +
   ylab(&quot;Average Points Scored&quot;) +
   ggtitle(&quot;Average Score Overall&quot;)</code></pre>
@@ -280,14 +259,14 @@ Ny_data %&gt;%
 <!-- rnb-plot-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>There is a slight postive correlation, but nothing too signficant. ###Let’s add more variables and see if there is any correlation between more and new variables.</p>
+<p>There is a slight postive correlation, but nothing too signficant. ### Let’s add more variables and see if there is any correlation between more and new variables.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTnlfZGF0YSAlPiVcbiAgZ2dwbG90KGFlcyh4PSBkaXN0cmljdCwgeT0gYXZnKSkgKyBcbiAgZ2VvbV9wb2ludCgpICtcbiAgZmFjZXRfZ3JpZChzZXh+eWVhcikgK1xuICB4bGFiKFwiRGlzdHJpY3QgTnVtYmVyXCIpICtcbiAgeWxhYihcIkF2ZXJhZ2UgUG9pbnRzIFNjb3JlZFwiKSArXG4gIGdndGl0bGUoXCJHZW5kZXIncyBBdmVyYWdlIFNjb3JlIE92ZXIgVGhlIFllYXJzXCIpXG5gYGAifQ== -->
-<pre class="r"><code>Ny_data %&gt;%
-  ggplot(aes(x= district, y= avg)) + 
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTnlfZGF0YSAlPiUgXG4gIGdncGxvdChhZXMoeCA9IGRpc3RyaWN0LCB5ID0gYXZnKSkgKyBcbiAgZ2VvbV9wb2ludCgpICtcbiAgZmFjZXRfZ3JpZChzZXggfiB5ZWFyKSArXG4gIHhsYWIoXCJEaXN0cmljdCBOdW1iZXJcIikgK1xuICB5bGFiKFwiQXZlcmFnZSBQb2ludHMgU2NvcmVkXCIpICtcbiAgZ2d0aXRsZShcIkdlbmRlcidzIEF2ZXJhZ2UgU2NvcmUgT3ZlciBUaGUgWWVhcnNcIilcbmBgYCJ9 -->
+<pre class="r"><code>Ny_data %&gt;% 
+  ggplot(aes(x = district, y = avg)) + 
   geom_point() +
-  facet_grid(sex~year) +
+  facet_grid(sex ~ year) +
   xlab(&quot;District Number&quot;) +
   ylab(&quot;Average Points Scored&quot;) +
   ggtitle(&quot;Gender's Average Score Over The Years&quot;)</code></pre>
@@ -306,15 +285,15 @@ Ny_data %&gt;%
 <h3>First, one must</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTm9fbGV2ZWxzPC0gXG4gIE55X2RhdGFbLDE6Nl0gXG4gIFxuRmVtYWxlIDwtIFxuICBOb19sZXZlbHMgJT4lXG5kYXRhLmZyYW1lKCkgJT4lXG4gIHNwcmVhZChrZXk9IHNleCwgdmFsdWU9YXZnKSAlPiVcbiAgcmVuYW1lKGZlbWFsZT1cIkZlbWFsZVwiKVxuICBcbkZlbWFsZSRkaXN0cmljdCA8LSBOVUxMXG5GZW1hbGUkZ3JhZGUgPC0gTlVMTFxuRmVtYWxlJHN0dWRlbnRzIDwtIE5VTExcbkZlbWFsZSRNYWxlIDwtIE5VTExcbkZfc2NvcmUgPC0gRmVtYWxlICU+JVxuICBkcm9wX25hKCkgXG5gYGAifQ== -->
-<pre class="r"><code>No_levels&lt;- 
-  Ny_data[,1:6] 
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTm9fbGV2ZWxzIDwtIFxuICBOeV9kYXRhWywgMTo2XSBcbiAgXG5GZW1hbGUgPC0gXG4gIE5vX2xldmVscyAlPiVcbmRhdGEuZnJhbWUoKSAlPiVcbiAgc3ByZWFkKGtleSA9IHNleCwgdmFsdWUgPSBhdmcpICU+JVxuICByZW5hbWUoZmVtYWxlID0gXCJGZW1hbGVcIilcbiAgXG5GZW1hbGUkZGlzdHJpY3QgPC0gTlVMTFxuRmVtYWxlJGdyYWRlIDwtIE5VTExcbkZlbWFsZSRzdHVkZW50cyA8LSBOVUxMXG5GZW1hbGUkTWFsZSA8LSBOVUxMXG5GX3Njb3JlIDwtIEZlbWFsZSAlPiVcbiAgZHJvcF9uYSgpIFxuYGBgIn0= -->
+<pre class="r"><code>No_levels &lt;- 
+  Ny_data[, 1:6] 
   
 Female &lt;- 
   No_levels %&gt;%
 data.frame() %&gt;%
-  spread(key= sex, value=avg) %&gt;%
-  rename(female=&quot;Female&quot;)
+  spread(key = sex, value = avg) %&gt;%
+  rename(female = &quot;Female&quot;)
   
 Female$district &lt;- NULL
 Female$grade &lt;- NULL
@@ -327,12 +306,12 @@ F_score &lt;- Female %&gt;%
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTWFsZSA8LSBcbiAgTm9fbGV2ZWxzICU+JVxuZGF0YS5mcmFtZSgpICU+JVxuICBzcHJlYWQoa2V5PSBzZXgsIHZhbHVlPWF2ZykgJT4lXG4gIHJlbmFtZShtYWxlPVwiTWFsZVwiKVxuTWFsZSRkaXN0cmljdCA8LSBOVUxMXG5NYWxlJGdyYWRlIDwtIE5VTExcbk1hbGUkc3R1ZGVudHMgPC0gTlVMTFxuTWFsZSRGZW1hbGUgPC0gTlVMTFxuTV9zY29yZSA8LSBNYWxlICU+JVxuICBkcm9wX25hKClcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTWFsZSA8LSBcbiAgTm9fbGV2ZWxzICU+JVxuZGF0YS5mcmFtZSgpICU+JVxuICBzcHJlYWQoa2V5ID0gc2V4LCB2YWx1ZSA9IGF2ZykgJT4lXG4gIHJlbmFtZShtYWxlID0gXCJNYWxlXCIpXG5NYWxlJGRpc3RyaWN0IDwtIE5VTExcbk1hbGUkZ3JhZGUgPC0gTlVMTFxuTWFsZSRzdHVkZW50cyA8LSBOVUxMXG5NYWxlJEZlbWFsZSA8LSBOVUxMXG5NX3Njb3JlIDwtIE1hbGUgJT4lXG4gIGRyb3BfbmEoKVxuYGBgIn0= -->
 <pre class="r"><code>Male &lt;- 
   No_levels %&gt;%
 data.frame() %&gt;%
-  spread(key= sex, value=avg) %&gt;%
-  rename(male=&quot;Male&quot;)
+  spread(key = sex, value = avg) %&gt;%
+  rename(male = &quot;Male&quot;)
 Male$district &lt;- NULL
 Male$grade &lt;- NULL
 Male$students &lt;- NULL
@@ -372,15 +351,33 @@ mean of x mean of y
 <h3>Based on a regression model, what variables contribute the most to the mean</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQXZnX21vZDwtXG4gIE55X2RhdGEgJT4lXG4gIGxtKHN0dWRlbnRzfiBsZXZlbF8xX3BlcmMgKyBsZXZlbF8yX3BlcmMgKyBsZXZlbF8zX3BlcmMgKyBsZXZlbF80X3BlcmMsIGRhdGE9LikgIFxuQXZnX21vZCRjb2VmZmljaWVudHNcbmBgYCJ9 -->
-<pre class="r"><code>Avg_mod&lt;-
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuQXZnX21vZCA8LVxuICBOeV9kYXRhICU+JVxuICBsbShzdHVkZW50cyB+IGxldmVsXzFfcGVyYyArIGxldmVsXzJfcGVyYyArIGxldmVsXzNfcGVyYyArIGxldmVsXzRfcGVyYywgZGF0YSA9IC4pICBcbnN1bW1hcnkoQXZnX21vZClcbmBgYCJ9 -->
+<pre class="r"><code>Avg_mod &lt;-
   Ny_data %&gt;%
-  lm(students~ level_1_perc + level_2_perc + level_3_perc + level_4_perc, data=.)  
-Avg_mod$coefficients</code></pre>
+  lm(students ~ level_1_perc + level_2_perc + level_3_perc + level_4_perc, data = .)  
+summary(Avg_mod)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiIChJbnRlcmNlcHQpIGxldmVsXzFfcGVyYyBsZXZlbF8yX3BlcmMgbGV2ZWxfM19wZXJjIGxldmVsXzRfcGVyYyBcbiAgMjQ0ODIuMTk4MSAgICAtMjM1Ljc5NTYgICAgLTIzNS4zMDc4ICAgIC0yMzQuNDgyNiAgICAtMjI5LjMwMTggXG4ifQ== -->
-<pre><code> (Intercept) level_1_perc level_2_perc level_3_perc level_4_perc 
-  24482.1981    -235.7956    -235.3078    -234.4826    -229.3018 </code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IHN0dWRlbnRzIH4gbGV2ZWxfMV9wZXJjICsgbGV2ZWxfMl9wZXJjICsgbGV2ZWxfM19wZXJjICsgXG4gICAgbGV2ZWxfNF9wZXJjLCBkYXRhID0gLilcblxuUmVzaWR1YWxzOlxuICAgTWluICAgICAxUSBNZWRpYW4gICAgIDNRICAgIE1heCBcbi04MTQuNiAtMzc2LjAgIC02OS4yICAyOTguNCAxMzQ5LjYgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgICBFc3RpbWF0ZSBTdGQuIEVycm9yIHQgdmFsdWUgUHIoPnx0fClcbihJbnRlcmNlcHQpICAgMjQ0ODIuMiAgICAxNjQ5MS4wICAgMS40ODUgICAgMC4xMzhcbmxldmVsXzFfcGVyYyAgIC0yMzUuOCAgICAgIDE2NS4wICAtMS40MjkgICAgMC4xNTNcbmxldmVsXzJfcGVyYyAgIC0yMzUuMyAgICAgIDE2NC45ICAtMS40MjcgICAgMC4xNTRcbmxldmVsXzNfcGVyYyAgIC0yMzQuNSAgICAgIDE2NC45ICAtMS40MjIgICAgMC4xNTVcbmxldmVsXzRfcGVyYyAgIC0yMjkuMyAgICAgIDE2NC45ICAtMS4zOTAgICAgMC4xNjVcblxuUmVzaWR1YWwgc3RhbmRhcmQgZXJyb3I6IDQ2NC4xIG9uIDIyOTkgZGVncmVlcyBvZiBmcmVlZG9tXG5NdWx0aXBsZSBSLXNxdWFyZWQ6ICAwLjAzMDI1LFx0QWRqdXN0ZWQgUi1zcXVhcmVkOiAgMC4wMjg1NiBcbkYtc3RhdGlzdGljOiAxNy45MyBvbiA0IGFuZCAyMjk5IERGLCAgcC12YWx1ZTogMS42NTVlLTE0XG4ifQ== -->
+<pre><code>
+Call:
+lm(formula = students ~ level_1_perc + level_2_perc + level_3_perc + 
+    level_4_perc, data = .)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-814.6 -376.0  -69.2  298.4 1349.6 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)   24482.2    16491.0   1.485    0.138
+level_1_perc   -235.8      165.0  -1.429    0.153
+level_2_perc   -235.3      164.9  -1.427    0.154
+level_3_perc   -234.5      164.9  -1.422    0.155
+level_4_perc   -229.3      164.9  -1.390    0.165
+
+Residual standard error: 464.1 on 2299 degrees of freedom
+Multiple R-squared:  0.03025,   Adjusted R-squared:  0.02856 
+F-statistic: 17.93 on 4 and 2299 DF,  p-value: 1.655e-14</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -402,7 +399,7 @@ rpart.plot(Avg_tree, roundint = FALSE)</code></pre>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkZpbmFsIFByb2plY3QiDQphdXRob3I6ICJMYXVyeW4gUGF2bGlrIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCiMgRXhwbGFuYXRpb24gT2YgVGhlIERhdGEgU2V0DQpUaGUgZGF0YSBzZXQgdGhhdCBpcyBiZWluZyB1c2VkIGluIHRoaXMgYW5hbHlzaXMgaXMgdGFrZW4gZnJvbSBkYXRhLmdvdi4gVGhpcyBzZXQgZXZvbHZlZCBmcm9tIG1hdGggYmVuY2htYXJrIGRhdGEgaW4gTmV3IFlvcmsuIEl0IGNvbnRhaW5zIGluZm9ybWF0aW9uIHN1Y2ggYXMgYXZlcmFnZSBzY29yZSwgbnVtYmVyIG9mIHBhcnRpY2lwYXRlcywgaG93IG1hbnkgc3R1ZGVudHMgc2NvcmVkIGluIGVhY2ggY2F0ZWdvcnksIGFuZCB0aGUgcGVyY2VudCBvZiBzdHVkZW50cyBpbiBlYWNoIGNhdGVnb3J5LiBMZXZlbCBvbmUgaXMgdGhlIGxvd2VzdCBzY29yZSByYW5nZSBhbmQgbGV2ZWwgZm91ciBpcyB0aGUgaGlnaGVzdC4gVGhpcyBkYXRhIGlzIGNvbGxlY3RlZCBmcm9tIDMyIGRpc3RyaWN0cyBhbmQgDQoNCg0KDQojI0NsZWFuIGVudmlyb25tZW50IGFuZCBsb2FkIHBhY2thZ2VzDQpgYGB7ciBtZXNzYWdlPVRSVUV9DQojQ2xlYW4gdXAgd29ya3NwYWNlIGVudmlyb25tZW50DQpybShsaXN0ID0gbHMoKSkNCg0KI0FsbCBwYWNrYWdlcyB1c2VkIGZvciB0aGUgcHJvamVjdA0KbGlicmFyeSh0aWR5cikNCmxpYnJhcnkoZHBseXIpDQpsaWJyYXJ5KGdncGxvdDIpDQpsaWJyYXJ5KHJwYXJ0LnBsb3QpDQpsaWJyYXJ5KHJwYXJ0KQ0KDQpgYGANCg0KIyNJbXBvcnQgZmlyc3QgZGF0YSBzZXQgYW5kIG5hbWUgaXQgDQpgYGB7cn0NCmxpYnJhcnkocmVhZHIpDQpOZXdfeW9yayA8LSByZWFkX2NzdigiZmluYWwgZGVjaXNpb24uY3N2IikNCmBgYA0KDQojI1ZpZXcgYW5kIG1ha2UgZGF0YSB0YWJsZSB0aWR5IA0KYGBge3J9DQpOeV9kYXRhIDwtIA0KTmV3X3lvcmsgJT4lDQogZHBseXI6OiBmaWx0ZXIoR3JhZGUhPSJBbGwgR3JhZGVzIikgJT4lDQogIHJlbmFtZShkaXN0cmljdD0gIkRpc3RyaWN0IiwgZ3JhZGU9ICJHcmFkZSIsIHllYXI9ICJZZWFyIiwgYXZnID0gIk1lYW4gU2NhbGUgU2NvcmUiLCBsZXZlbF8xID0gIkxldmVsIDEgIyIsIGxldmVsXzFfcGVyYyA9ICJMZXZlbCAxICUiLCBsZXZlbF8yID0gIkxldmVsIDIgIyIsIGxldmVsXzJfcGVyYyA9ICJMZXZlbCAyICUiLGxldmVsXzMgPSAiTGV2ZWwgMyAjIiwgbGV2ZWxfM19wZXJjID0gIkxldmVsIDMgJSIsbGV2ZWxfNCA9ICJMZXZlbCA0ICMiLCBsZXZlbF80X3BlcmMgPSAiTGV2ZWwgNCAlIiwgc3R1ZGVudHM9Ik51bWJlciBUZXN0ZWQiLCBzZXg9ICJDYXRlZ29yeSIgKQ0KICANCk55X2RhdGEkYExldmVsIDMrNCAjYCA8LSBOVUxMDQpOeV9kYXRhJGBMZXZlbCAzKzQgJWAgPC0gTlVMTA0KDQpOeV9kYXRhICU+JQ0KICByZW1vdmUocm93PSAiQWxsIEdyYWRlcyIpDQoNCmhlYWQoTnlfZGF0YSkNCg0KDQoNCmBgYA0KDQojI1BsYXkgYXJvdW5kIHdpdGggZGF0YSBhbmQgZmluZCBhbnkgY29ycmVsYXRpb24NCiMjI0RvZXMgdGhlIG51bWJlciBvZiBzdHVkZW50cyB0YWtpbmcgdGhlIGJlbmNobWFyayBpbmNyZWFzZSB0aGUgYXZlcmFnZSBzY29yZT8gDQpgYGB7cn0NCk55X2RhdGEgJT4lDQogIGdncGxvdChhZXMoeD0gc3R1ZGVudHMsIHk9IGF2ZykpICsgDQogIGdlb21fcG9pbnQoYWVzKGNvbG9yPXNleCkpICsNCiAgeGxhYigiTnVtYmVyIG9mIFN0dWRlbnRzIikgKw0KICB5bGFiKCJBdmVyYWdlIFBvaW50cyBTY29yZWQiKSArDQogIGdndGl0bGUoIkF2ZXJhZ2UgU2NvcmUgT3ZlcmFsbCIpDQoNCg0KDQpgYGANCg0KVGhlcmUgaXMgYSBzbGlnaHQgcG9zdGl2ZSBjb3JyZWxhdGlvbiwgYnV0IG5vdGhpbmcgdG9vIHNpZ25maWNhbnQuDQojIyNMZXQncyBhZGQgbW9yZSB2YXJpYWJsZXMgYW5kIHNlZSBpZiB0aGVyZSBpcyBhbnkgY29ycmVsYXRpb24gYmV0d2VlbiBtb3JlIGFuZCBuZXcgdmFyaWFibGVzLiAgDQpgYGB7cn0NCk55X2RhdGEgJT4lDQogIGdncGxvdChhZXMoeD0gZGlzdHJpY3QsIHk9IGF2ZykpICsgDQogIGdlb21fcG9pbnQoKSArDQogIGZhY2V0X2dyaWQoc2V4fnllYXIpICsNCiAgeGxhYigiRGlzdHJpY3QgTnVtYmVyIikgKw0KICB5bGFiKCJBdmVyYWdlIFBvaW50cyBTY29yZWQiKSArDQogIGdndGl0bGUoIkdlbmRlcidzIEF2ZXJhZ2UgU2NvcmUgT3ZlciBUaGUgWWVhcnMiKQ0KDQoNCg0KDQpgYGANCkp1ZGdpbmcgZnJvbSB0aGUgcGFzdCBncmFwaCwgaXQgc2VlbXMgdGhhdCBmZW1hbGVzIGhhdmUgYSBzbGlnaHRseSBoaWdoZXIgYmVuY2htYXJrIHNjb3JlLiBJdCBpcyBhbHNvIG5vdGljZWFibGUgdGhhdCB0aGUgc2NvcmVzIG92ZXIgdGhlIGRpc3RyaWN0cyBpbiB0aGUgbW9yZSByZWNlbnQgeWVhcnMgaGF2ZSBsZXNzIG9mIGEgcG9zdGl2ZSBjb3JyZWxhdGlvbi5UaGVzZSBvYnNlcnZhdGlvbnMgYnJpbmcgYWJvdXQgYSBxdWVzdGlvbjogDQoNCiMjIFVzaW5nIGEgaHlwb3RoZXNpcyB0ZXN0LCBpcyB0aGVyZSBzdGF0aXN0aWNhbGx5IHNpZ25pZmljYW50IGV2aWRlbmNlIHRoYXQgZmVtYWxlcyBoYXZlIGhpZ2hlciBzY29yZXMgdGhhbiBtYWxlcz8gDQoNCiMjIyBGaXJzdCwgb25lIG11c3QgDQpgYGB7cn0NCk5vX2xldmVsczwtIA0KICBOeV9kYXRhWywxOjZdIA0KDQogIA0KDQpGZW1hbGUgPC0gDQogIE5vX2xldmVscyAlPiUNCmRhdGEuZnJhbWUoKSAlPiUNCiAgc3ByZWFkKGtleT0gc2V4LCB2YWx1ZT1hdmcpICU+JQ0KICByZW5hbWUoZmVtYWxlPSJGZW1hbGUiKQ0KICANCkZlbWFsZSRkaXN0cmljdCA8LSBOVUxMDQpGZW1hbGUkZ3JhZGUgPC0gTlVMTA0KRmVtYWxlJHN0dWRlbnRzIDwtIE5VTEwNCkZlbWFsZSRNYWxlIDwtIE5VTEwNCg0KRl9zY29yZSA8LSBGZW1hbGUgJT4lDQogIGRyb3BfbmEoKSANCg0KDQpgYGANCiAgDQoNCmBgYHtyfQ0KTWFsZSA8LSANCiAgTm9fbGV2ZWxzICU+JQ0KZGF0YS5mcmFtZSgpICU+JQ0KICBzcHJlYWQoa2V5PSBzZXgsIHZhbHVlPWF2ZykgJT4lDQogIHJlbmFtZShtYWxlPSJNYWxlIikNCg0KTWFsZSRkaXN0cmljdCA8LSBOVUxMDQpNYWxlJGdyYWRlIDwtIE5VTEwNCk1hbGUkc3R1ZGVudHMgPC0gTlVMTA0KTWFsZSRGZW1hbGUgPC0gTlVMTA0KDQpNX3Njb3JlIDwtIE1hbGUgJT4lDQogIGRyb3BfbmEoKQ0KYGBgDQoNCmBgYHtyfQ0KDQptdTEgPC0gYXMudmVjdG9yKEZfc2NvcmUkZmVtYWxlKQ0KbXUyIDwtIGFzLnZlY3RvcihNX3Njb3JlJG1hbGUpDQoNCg0KdC50ZXN0KG11MSwgbXUyKQ0KDQoNCmBgYA0KIyMjIENvbmNsdXNpb246IFlBWQ0KDQoNCiMjI0Jhc2VkIG9uIGEgcmVncmVzc2lvbiBtb2RlbCwgd2hhdCB2YXJpYWJsZXMgY29udHJpYnV0ZSB0aGUgbW9zdCB0byB0aGUgbWVhbg0KYGBge3J9DQoNCkF2Z19tb2Q8LQ0KICBOeV9kYXRhICU+JQ0KICBsbShzdHVkZW50c34gbGV2ZWxfMV9wZXJjICsgbGV2ZWxfMl9wZXJjICsgbGV2ZWxfM19wZXJjICsgbGV2ZWxfNF9wZXJjLCBkYXRhPS4pICANCg0KDQpBdmdfbW9kJGNvZWZmaWNpZW50cw0KDQpgYGANCg0KDQoNCmBgYHtyfQ0KDQpBdmdfdHJlZSA8LSANCiBOeV9kYXRhICU+JSANCiAgcnBhcnQoYXZnIH4gbGV2ZWxfMSArIGxldmVsXzIgKyBsZXZlbF8zICsgbGV2ZWxfNCwgZGF0YSA9IC4pDQoNCnJwYXJ0LnBsb3QoQXZnX3RyZWUsIHJvdW5kaW50ID0gRkFMU0UpDQoNCg0KYGBgDQoNCg0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkZpbmFsIFByb2plY3QiDQphdXRob3I6ICJMYXVyeW4gUGF2bGlrIg0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCiMgRXhwbGFuYXRpb24gT2YgVGhlIERhdGEgU2V0DQpUaGUgZGF0YSBzZXQgdGhhdCBpcyBiZWluZyB1c2VkIGluIHRoaXMgYW5hbHlzaXMgaXMgdGFrZW4gZnJvbSBkYXRhLmdvdi4gVGhpcyBzZXQgZXZvbHZlZCBmcm9tIG1hdGggYmVuY2htYXJrIGRhdGEgaW4gTmV3IFlvcmsuIEl0IGNvbnRhaW5zIGluZm9ybWF0aW9uIHN1Y2ggYXMgYXZlcmFnZSBzY29yZSwgbnVtYmVyIG9mIHBhcnRpY2lwYXRlcywgaG93IG1hbnkgc3R1ZGVudHMgc2NvcmVkIGluIGVhY2ggY2F0ZWdvcnksIGFuZCB0aGUgcGVyY2VudCBvZiBzdHVkZW50cyBpbiBlYWNoIGNhdGVnb3J5LiBMZXZlbCBvbmUgaXMgdGhlIGxvd2VzdCBzY29yZSByYW5nZSBhbmQgbGV2ZWwgZm91ciBpcyB0aGUgaGlnaGVzdC4gVGhpcyBkYXRhIGlzIGNvbGxlY3RlZCBmcm9tIDMyIGRpc3RyaWN0cyBhbmQgDQoNCg0KDQojIyBDbGVhbiBlbnZpcm9ubWVudCBhbmQgbG9hZCBwYWNrYWdlcw0KYGBge3IgbWVzc2FnZSA9IEZBTFNFfQ0KIyBDbGVhbiB1cCB3b3Jrc3BhY2UgZW52aXJvbm1lbnQNCnJtKGxpc3QgPSBscygpKQ0KDQojIEFsbCBwYWNrYWdlcyB1c2VkIGZvciB0aGUgcHJvamVjdA0KbGlicmFyeSh0aWR5cikNCmxpYnJhcnkoZHBseXIpDQpsaWJyYXJ5KGdncGxvdDIpDQpsaWJyYXJ5KHJwYXJ0LnBsb3QpDQpsaWJyYXJ5KHJwYXJ0KQ0KDQpgYGANCg0KIyMgSW1wb3J0IGZpcnN0IGRhdGEgc2V0IGFuZCBuYW1lIGl0IA0KYGBge3IgbWVzc2FnZSA9IEZBTFNFfQ0KbGlicmFyeShyZWFkcikNCk5ld195b3JrIDwtIHJlYWRfY3N2KCJmaW5hbCBkZWNpc2lvbi5jc3YiKQ0KYGBgDQoNCiMjIFZpZXcgYW5kIG1ha2UgZGF0YSB0YWJsZSB0aWR5IA0KYGBge3J9DQpOeV9kYXRhIDwtIA0KTmV3X3lvcmsgJT4lDQogZHBseXI6OiBmaWx0ZXIoR3JhZGUgIT0gIkFsbCBHcmFkZXMiKSAlPiUNCiAgcmVuYW1lKGRpc3RyaWN0ID0gIkRpc3RyaWN0IiwgZ3JhZGUgPSAiR3JhZGUiLCB5ZWFyID0gIlllYXIiLCBhdmcgPSAiTWVhbiBTY2FsZSBTY29yZSIsIGxldmVsXzEgPSAiTGV2ZWwgMSAjIiwgbGV2ZWxfMV9wZXJjID0gIkxldmVsIDEgJSIsIGxldmVsXzIgPSAiTGV2ZWwgMiAjIiwgbGV2ZWxfMl9wZXJjID0gIkxldmVsIDIgJSIsIGxldmVsXzMgPSAiTGV2ZWwgMyAjIiwgbGV2ZWxfM19wZXJjID0gIkxldmVsIDMgJSIsIGxldmVsXzQgPSAiTGV2ZWwgNCAjIiwgbGV2ZWxfNF9wZXJjID0gIkxldmVsIDQgJSIsIHN0dWRlbnRzID0gIk51bWJlciBUZXN0ZWQiLCBzZXggPSAiQ2F0ZWdvcnkiICkNCiAgDQpOeV9kYXRhJGBMZXZlbCAzKzQgI2AgPC0gTlVMTA0KTnlfZGF0YSRgTGV2ZWwgMys0ICVgIDwtIE5VTEwNCg0KTnlfZGF0YSAlPiUNCiAgcmVtb3ZlKHJvdyA9ICJBbGwgR3JhZGVzIikNCg0KaGVhZChOeV9kYXRhKQ0KDQoNCg0KYGBgDQoNCiMjIFBsYXkgYXJvdW5kIHdpdGggZGF0YSBhbmQgZmluZCBhbnkgY29ycmVsYXRpb24NCiMjIyBEb2VzIHRoZSBudW1iZXIgb2Ygc3R1ZGVudHMgdGFraW5nIHRoZSBiZW5jaG1hcmsgaW5jcmVhc2UgdGhlIGF2ZXJhZ2Ugc2NvcmU/IA0KYGBge3J9DQpOeV9kYXRhICU+JQ0KICBnZ3Bsb3QoYWVzKHggPSBzdHVkZW50cywgeSA9IGF2ZykpICsgDQogIGdlb21fcG9pbnQoYWVzKGNvbG9yID0gc2V4KSkgKw0KICB4bGFiKCJOdW1iZXIgb2YgU3R1ZGVudHMiKSArDQogIHlsYWIoIkF2ZXJhZ2UgUG9pbnRzIFNjb3JlZCIpICsNCiAgZ2d0aXRsZSgiQXZlcmFnZSBTY29yZSBPdmVyYWxsIikNCg0KDQoNCmBgYA0KDQpUaGVyZSBpcyBhIHNsaWdodCBwb3N0aXZlIGNvcnJlbGF0aW9uLCBidXQgbm90aGluZyB0b28gc2lnbmZpY2FudC4NCiMjIyBMZXQncyBhZGQgbW9yZSB2YXJpYWJsZXMgYW5kIHNlZSBpZiB0aGVyZSBpcyBhbnkgY29ycmVsYXRpb24gYmV0d2VlbiBtb3JlIGFuZCBuZXcgdmFyaWFibGVzLiAgDQpgYGB7cn0NCk55X2RhdGEgJT4lIA0KICBnZ3Bsb3QoYWVzKHggPSBkaXN0cmljdCwgeSA9IGF2ZykpICsgDQogIGdlb21fcG9pbnQoKSArDQogIGZhY2V0X2dyaWQoc2V4IH4geWVhcikgKw0KICB4bGFiKCJEaXN0cmljdCBOdW1iZXIiKSArDQogIHlsYWIoIkF2ZXJhZ2UgUG9pbnRzIFNjb3JlZCIpICsNCiAgZ2d0aXRsZSgiR2VuZGVyJ3MgQXZlcmFnZSBTY29yZSBPdmVyIFRoZSBZZWFycyIpDQoNCg0KDQoNCmBgYA0KDQoNCkp1ZGdpbmcgZnJvbSB0aGUgcGFzdCBncmFwaCwgaXQgc2VlbXMgdGhhdCBmZW1hbGVzIGhhdmUgYSBzbGlnaHRseSBoaWdoZXIgYmVuY2htYXJrIHNjb3JlLiBJdCBpcyBhbHNvIG5vdGljZWFibGUgdGhhdCB0aGUgc2NvcmVzIG92ZXIgdGhlIGRpc3RyaWN0cyBpbiB0aGUgbW9yZSByZWNlbnQgeWVhcnMgaGF2ZSBsZXNzIG9mIGEgcG9zdGl2ZSBjb3JyZWxhdGlvbi5UaGVzZSBvYnNlcnZhdGlvbnMgYnJpbmcgYWJvdXQgYSBxdWVzdGlvbjogDQoNCiMjIFVzaW5nIGEgaHlwb3RoZXNpcyB0ZXN0LCBpcyB0aGVyZSBzdGF0aXN0aWNhbGx5IHNpZ25pZmljYW50IGV2aWRlbmNlIHRoYXQgZmVtYWxlcyBoYXZlIGhpZ2hlciBzY29yZXMgdGhhbiBtYWxlcz8gDQoNCiMjIyBGaXJzdCwgb25lIG11c3QgDQpgYGB7cn0NCk5vX2xldmVscyA8LSANCiAgTnlfZGF0YVssIDE6Nl0gDQoNCiAgDQoNCkZlbWFsZSA8LSANCiAgTm9fbGV2ZWxzICU+JQ0KZGF0YS5mcmFtZSgpICU+JQ0KICBzcHJlYWQoa2V5ID0gc2V4LCB2YWx1ZSA9IGF2ZykgJT4lDQogIHJlbmFtZShmZW1hbGUgPSAiRmVtYWxlIikNCiAgDQpGZW1hbGUkZGlzdHJpY3QgPC0gTlVMTA0KRmVtYWxlJGdyYWRlIDwtIE5VTEwNCkZlbWFsZSRzdHVkZW50cyA8LSBOVUxMDQpGZW1hbGUkTWFsZSA8LSBOVUxMDQoNCkZfc2NvcmUgPC0gRmVtYWxlICU+JQ0KICBkcm9wX25hKCkgDQoNCg0KYGBgDQogIA0KDQpgYGB7cn0NCk1hbGUgPC0gDQogIE5vX2xldmVscyAlPiUNCmRhdGEuZnJhbWUoKSAlPiUNCiAgc3ByZWFkKGtleSA9IHNleCwgdmFsdWUgPSBhdmcpICU+JQ0KICByZW5hbWUobWFsZSA9ICJNYWxlIikNCg0KTWFsZSRkaXN0cmljdCA8LSBOVUxMDQpNYWxlJGdyYWRlIDwtIE5VTEwNCk1hbGUkc3R1ZGVudHMgPC0gTlVMTA0KTWFsZSRGZW1hbGUgPC0gTlVMTA0KDQpNX3Njb3JlIDwtIE1hbGUgJT4lDQogIGRyb3BfbmEoKQ0KYGBgDQoNCmBgYHtyfQ0KDQptdTEgPC0gYXMudmVjdG9yKEZfc2NvcmUkZmVtYWxlKQ0KbXUyIDwtIGFzLnZlY3RvcihNX3Njb3JlJG1hbGUpDQoNCg0KdC50ZXN0KG11MSwgbXUyKQ0KDQoNCmBgYA0KIyMjIENvbmNsdXNpb246IFlBWQ0KDQoNCiMjIyBCYXNlZCBvbiBhIHJlZ3Jlc3Npb24gbW9kZWwsIHdoYXQgdmFyaWFibGVzIGNvbnRyaWJ1dGUgdGhlIG1vc3QgdG8gdGhlIG1lYW4NCmBgYHtyfQ0KDQpBdmdfbW9kIDwtDQogIE55X2RhdGEgJT4lDQogIGxtKHN0dWRlbnRzIH4gbGV2ZWxfMV9wZXJjICsgbGV2ZWxfMl9wZXJjICsgbGV2ZWxfM19wZXJjICsgbGV2ZWxfNF9wZXJjLCBkYXRhID0gLikgIA0KDQoNCnN1bW1hcnkoQXZnX21vZCkNCg0KYGBgDQoNCg0KDQpgYGB7cn0NCg0KQXZnX3RyZWUgPC0gDQogTnlfZGF0YSAlPiUgDQogIHJwYXJ0KGF2ZyB+IGxldmVsXzEgKyBsZXZlbF8yICsgbGV2ZWxfMyArIGxldmVsXzQsIGRhdGEgPSAuKQ0KDQpycGFydC5wbG90KEF2Z190cmVlLCByb3VuZGludCA9IEZBTFNFKQ0KDQoNCmBgYA0KDQoNCg0KDQo=</div>
 
 
 

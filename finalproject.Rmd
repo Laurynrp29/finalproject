@@ -1,10 +1,10 @@
 ---
 title: "Final Project"
-author: Lauryn Pavlik
+author: "Lauryn Pavlik"
 output: html_notebook
 ---
-#Make sure to explain data sets and variables
-
+# Explanation Of The Data Set
+The data set that is being used in this analysis is taken from data.gov. This set evolved from math benchmark data in New York. It contains information such as average score, number of participates, how many students scored in each category, and the percent of students in each category. Level one is the lowest score range and level four is the highest. This data is collected from 32 districts and 
 
 
 
@@ -25,20 +25,23 @@ library(rpart)
 ##Import first data set and name it 
 ```{r}
 library(readr)
-new_york <- read_csv("final decision.csv")
+New_york <- read_csv("final decision.csv")
 ```
 
 ##View and make data table tidy 
 ```{r}
-ny_data <- 
-new_york %>%
+Ny_data <- 
+New_york %>%
  dplyr:: filter(Grade!="All Grades") %>%
   rename(district= "District", grade= "Grade", year= "Year", avg = "Mean Scale Score", level_1 = "Level 1 #", level_1_perc = "Level 1 %", level_2 = "Level 2 #", level_2_perc = "Level 2 %",level_3 = "Level 3 #", level_3_perc = "Level 3 %",level_4 = "Level 4 #", level_4_perc = "Level 4 %", students="Number Tested", sex= "Category" )
   
-ny_data$`Level 3+4 #` <- NULL
-ny_data$`Level 3+4 %` <- NULL
+Ny_data$`Level 3+4 #` <- NULL
+Ny_data$`Level 3+4 %` <- NULL
 
-head(ny_data)
+Ny_data %>%
+  remove(row= "All Grades")
+
+head(Ny_data)
 
 
 
@@ -47,7 +50,7 @@ head(ny_data)
 ##Play around with data and find any correlation
 ###Does the number of students taking the benchmark increase the average score? 
 ```{r}
-ny_data %>%
+Ny_data %>%
   ggplot(aes(x= students, y= avg)) + 
   geom_point(aes(color=sex)) +
   xlab("Number of Students") +
@@ -61,7 +64,7 @@ ny_data %>%
 There is a slight postive correlation, but nothing too signficant.
 ###Let's add more variables and see if there is any correlation between more and new variables.  
 ```{r}
-ny_data %>%
+Ny_data %>%
   ggplot(aes(x= district, y= avg)) + 
   geom_point() +
   facet_grid(sex~year) +
@@ -79,43 +82,49 @@ Judging from the past graph, it seems that females have a slightly higher benchm
 
 ### First, one must 
 ```{r}
-no_levels<- 
-  ny_data[,1:6]
+No_levels<- 
+  Ny_data[,1:6] 
 
-female <- 
-  no_levels %>%
+  
+
+Female <- 
+  No_levels %>%
 data.frame() %>%
-  spread(key= sex, value=avg) 
+  spread(key= sex, value=avg) %>%
+  rename(female="Female")
+  
+Female$district <- NULL
+Female$grade <- NULL
+Female$students <- NULL
+Female$Male <- NULL
 
-female$district <- NULL
-female$grade <- NULL
-female$students <- NULL
-female$Male <- NULL
+F_score <- Female %>%
+  drop_na() 
 
-f_score <- female %>%
-  drop_na()
+
 ```
   
 
 ```{r}
-male <- 
-  no_levels %>%
+Male <- 
+  No_levels %>%
 data.frame() %>%
-  spread(key= sex, value=avg) 
+  spread(key= sex, value=avg) %>%
+  rename(male="Male")
 
-male$district <- NULL
-male$grade <- NULL
-male$students <- NULL
-male$Female <- NULL
+Male$district <- NULL
+Male$grade <- NULL
+Male$students <- NULL
+Male$Female <- NULL
 
-m_score <- male %>%
+M_score <- Male %>%
   drop_na()
 ```
 
 ```{r}
 
-mu1 <- as.vector(f_score$Female)
-mu2 <- as.vector(m_score$Male)
+mu1 <- as.vector(F_score$female)
+mu2 <- as.vector(M_score$male)
 
 
 t.test(mu1, mu2)
@@ -125,15 +134,15 @@ t.test(mu1, mu2)
 ### Conclusion: YAY
 
 
-## Based on a regression model, what variables contribute the most to the mean
+###Based on a regression model, what variables contribute the most to the mean
 ```{r}
 
-avg_mod<-
-  ny_data %>%
+Avg_mod<-
+  Ny_data %>%
   lm(students~ level_1_perc + level_2_perc + level_3_perc + level_4_perc, data=.)  
 
 
-avg_mod$coefficients
+Avg_mod$coefficients
 
 ```
 
@@ -141,11 +150,11 @@ avg_mod$coefficients
 
 ```{r}
 
-mod3 <- 
- ny_data %>% 
+Avg_tree <- 
+ Ny_data %>% 
   rpart(avg ~ level_1 + level_2 + level_3 + level_4, data = .)
 
-rpart.plot(mod3, roundint = FALSE)
+rpart.plot(Avg_tree, roundint = FALSE)
 
 
 ```

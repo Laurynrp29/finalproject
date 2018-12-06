@@ -8,7 +8,7 @@ output: html_notebook
 
 
 
-#Clean environment and load packages
+##Clean environment and load packages
 ```{r message=TRUE}
 #Clean up workspace environment
 rm(list = ls())
@@ -17,18 +17,18 @@ rm(list = ls())
 library(tidyr)
 library(dplyr)
 library(ggplot2)
-
-library(party)
+library(rpart.plot)
+library(rpart)
 
 ```
 
-#Import first data set and name it 
+##Import first data set and name it 
 ```{r}
 library(readr)
 new_york <- read_csv("final decision.csv")
 ```
 
-#View and make data table tidy 
+##View and make data table tidy 
 ```{r}
 ny_data <- 
 new_york %>%
@@ -44,8 +44,8 @@ head(ny_data)
 
 ```
 
-#Play around with data and find any correlation
-##Does the number of students taking the benchmark increase the average score? 
+##Play around with data and find any correlation
+###Does the number of students taking the benchmark increase the average score? 
 ```{r}
 ny_data %>%
   ggplot(aes(x= students, y= avg)) + 
@@ -59,7 +59,7 @@ ny_data %>%
 ```
 
 There is a slight postive correlation, but nothing too signficant.
-##Let's add more variables and see if there is any correlation between more and new variables.  
+###Let's add more variables and see if there is any correlation between more and new variables.  
 ```{r}
 ny_data %>%
   ggplot(aes(x= district, y= avg)) + 
@@ -73,7 +73,7 @@ ny_data %>%
 
 
 ```
-#Judging from the past graph, it seems that females have a slightly higher benchmark score. It is also noticeable that the scores over the districts in the more recent years have less of a postive correlation.These observations bring about a question: 
+Judging from the past graph, it seems that females have a slightly higher benchmark score. It is also noticeable that the scores over the districts in the more recent years have less of a postive correlation.These observations bring about a question: 
 
 ## Using a hypothesis test, is there statistically significant evidence that females have higher scores than males? 
 
@@ -130,7 +130,7 @@ t.test(mu1, mu2)
 
 avg_mod<-
   ny_data %>%
-  lm(avg~ level_1 + level_2 + level_3 + level_4, data=.)  
+  lm(students~ level_1_perc + level_2_perc + level_3_perc + level_4_perc, data=.)  
 
 
 avg_mod$coefficients
@@ -139,12 +139,16 @@ avg_mod$coefficients
 
 
 
+```{r}
+
+mod3 <- 
+ ny_data %>% 
+  rpart(avg ~ level_1 + level_2 + level_3 + level_4, data = .)
+
+rpart.plot(mod3, roundint = FALSE)
 
 
-
-
-
-
+```
 
 
 

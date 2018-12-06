@@ -4,7 +4,7 @@ author: "Lauryn Pavlik"
 output: html_notebook
 ---
 # Explanation Of The Data Set
-The data set that is being used in this analysis is taken from data.gov. This set evolved from math benchmark data in New York. It contains information such as average score, number of participates, how many students scored in each category, and the percent of students in each category. Level one is the lowest score range and level four is the highest. This data is collected from 32 districts and 
+The data set that is being used in this analysis is taken from data.gov. This set evolved from math benchmark data in New York. It contains information such as average score, number of participants, how many students scored in each category, and the percent of students in each category. Level one is the lowest score range and level four is the highest. This data is collected from 32 districts and six grade levels over the course of six years. 
 
 
 
@@ -22,7 +22,7 @@ library(rpart)
 
 ```
 
-## Import first data set and name it 
+## Import the data set and name it 
 ```{r message = FALSE}
 library(readr)
 New_york <- read_csv("final decision.csv")
@@ -30,11 +30,13 @@ New_york <- read_csv("final decision.csv")
 
 ## View and make data table tidy 
 ```{r}
+# Rename the variables to accommodate style conventions
 Ny_data <- 
 New_york %>%
  dplyr:: filter(Grade != "All Grades") %>%
   rename(district = "District", grade = "Grade", year = "Year", avg = "Mean Scale Score", level_1 = "Level 1 #", level_1_perc = "Level 1 %", level_2 = "Level 2 #", level_2_perc = "Level 2 %", level_3 = "Level 3 #", level_3_perc = "Level 3 %", level_4 = "Level 4 #", level_4_perc = "Level 4 %", students = "Number Tested", sex = "Category" )
-  
+
+# Remove repeated columns and non numeric inputs for quantitative variables
 Ny_data$`Level 3+4 #` <- NULL
 Ny_data$`Level 3+4 %` <- NULL
 
@@ -47,9 +49,11 @@ head(Ny_data)
 
 ```
 
-## Play around with data and find any correlation
+## Ask questions to become familiar with the data 
+
 ### Does the number of students taking the benchmark increase the average score? 
 ```{r}
+# Scatterplot 
 Ny_data %>%
   ggplot(aes(x = students, y = avg)) + 
   geom_point(aes(color = sex)) +
@@ -61,9 +65,10 @@ Ny_data %>%
 
 ```
 
-There is a slight postive correlation, but nothing too signficant.
-### Let's add more variables and see if there is any correlation between more and new variables.  
+It can be observed that there is a slight postive correlation, but nothing signficant to the eye. 
+### Let's add more variables to see if there is any correlation between new variables  
 ```{r}
+# Scatterplot
 Ny_data %>% 
   ggplot(aes(x = district, y = avg)) + 
   geom_point() +
@@ -78,65 +83,70 @@ Ny_data %>%
 ```
 
 
-Judging from the past graph, it seems that females have a slightly higher benchmark score. It is also noticeable that the scores over the districts in the more recent years have less of a postive correlation.These observations bring about a question: 
+Judging from the graph, it seems that females have a slightly higher benchmark score. It is also noticeable that the scores over the districts in the more recent years have less of a postive correlation. These observations bring about a question: 
 
 ## Using a hypothesis test, is there statistically significant evidence that females have higher scores than males? 
 
-### First, one must 
+### First, create a data table of only female scores
 ```{r}
+# Create table that only contains the first six variables of the original tidy table
 No_levels <- 
   Ny_data[, 1:6] 
 
   
-
-Female <- 
+# Create table with only female scores
+F_score <- 
   No_levels %>%
 data.frame() %>%
-  spread(key = sex, value = avg) %>%
-  rename(female = "Female")
-  
-Female$district <- NULL
-Female$grade <- NULL
-Female$students <- NULL
-Female$Male <- NULL
+  spread(key = sex, value = avg) %>%   # Spread sex into seperate columns
+  rename(female = "Female") %>% 
+  drop_na(female)   # Remove any missing values for females 
 
-F_score <- Female %>%
-  drop_na() 
+# Drop the four unneeded variables 
+F_score$district <- NULL
+F_score$grade <- NULL
+F_score$students <- NULL
+F_score$Male <- NULL
+
+
 
 
 ```
   
-
+### Second, create a data table of only male scores   
 ```{r}
-Male <- 
+# Create table with only male scores
+M_score <- 
   No_levels %>%
 data.frame() %>%
-  spread(key = sex, value = avg) %>%
-  rename(male = "Male")
+  spread(key = sex, value = avg) %>%  # Again, spread sex into seperate columns
+  rename(male = "Male") %>%
+  drop_na(male) # Remove missing values for males
 
-Male$district <- NULL
-Male$grade <- NULL
-Male$students <- NULL
-Male$Female <- NULL
+# Drop the four unneeded variables 
+M_score$district <- NULL
+M_score$grade <- NULL
+M_score$students <- NULL
+M_score$Female <- NULL
 
-M_score <- Male %>%
-  drop_na()
+
 ```
 
+### Third, assign vectors to mu 1 and mu 2 to run a two sample t test
 ```{r}
 
-mu1 <- as.vector(F_score$female)
-mu2 <- as.vector(M_score$male)
+mu_1 <- as.vector(F_score$female)
+mu_2 <- as.vector(M_score$male)
 
 
-t.test(mu1, mu2)
+t.test(mu_1, mu_2)
 
 
 ```
-### Conclusion: YAY
+From this hypothesis test, a p value of 0.0003039 is produced. Since the p value is very small, the null hypothesis can be rejected and there is significant evidence produced, that females tend to have a greater average score on math benchmarks than males do. From this data, we are 95% confident that the average female score is about 1.22 points to 4.12 points higher than the male average score. 
 
 
-### Based on a regression model, what variables contribute the most to the mean
+## Now that we know females score 
 ```{r}
 
 Avg_mod <-

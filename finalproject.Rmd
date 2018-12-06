@@ -6,8 +6,6 @@ output: html_notebook
 # Explanation Of The Data Set
 The data set that is being used in this analysis is taken from data.gov. This set evolved from math benchmark data in New York. It contains information such as average score, number of participants, how many students scored in each category, and the percent of students in each category. Level one is the lowest score range and level four is the highest. This data is collected from 32 districts and six grade levels over the course of six years. 
 
-
-
 ## Clean environment and load packages
 ```{r message = FALSE}
 # Clean up workspace environment
@@ -26,7 +24,11 @@ library(rpart)
 ```{r message = FALSE}
 library(readr)
 New_york <- read_csv("final decision.csv")
+
+head(New_york)
 ```
+
+Here the table is not yet tidy, rows further down contain non-numerics in the grade column and all variable names need edited. 
 
 ## View and make data table tidy 
 ```{r warning = FALSE}
@@ -49,7 +51,7 @@ head(Ny_data)
 
 ```
 
-## Ask questions to become familiar with the data 
+## Ask questions to become familiar with the data set
 
 ### Does the number of students taking the benchmark increase the average score? 
 ```{r}
@@ -84,6 +86,18 @@ Ny_data %>%
 Judging from the graph, it seems that females have a slightly higher benchmark score. It is also noticeable that the scores over the districts in the more recent years have less of a postive correlation. These observations bring about a question: 
 
 ## Using a hypothesis test, is there statistically significant evidence that females have higher scores than males? 
+Before we can move on with the test, it is safe to check and make sure there is the same total amount of males and females that have taken the benchmark. If the results are different, the test will not be reliable. 
+
+# Test counts
+```{r}
+Ny_data %>%
+  group_by(sex) %>%
+  summarise(count = n())
+
+
+```
+
+There is the same amount of each sex, so the test is possible. 
 
 ### First, create a data table of only female scores
 ```{r}
@@ -132,37 +146,50 @@ M_score$Female <- NULL
 
 ### Third, assign vectors to mu 1 and mu 2 and run a two sample t test
 ```{r}
-
+# Assign vectors
 mu_1 <- as.vector(F_score$female)
 mu_2 <- as.vector(M_score$male)
 
-
+# Run test
 t.test(mu_1, mu_2)
 
 
 ```
+
 From this hypothesis test, a p value of 0.0003039 is produced. Since the p value is very small, the null hypothesis can be rejected and there is significant evidence produced, that females tend to have a greater average score on math benchmarks than males do. From this data, we are 95% confident that the average female score is about 1.22 points to 4.12 points higher than the male average score. 
 
 
-## Now that we know females score 
-```{r}
+## Now that we know females score higher than males, it is time to question the levels of scoring
 
+### Does any level of scoring have a more significant impact than the rest on the average score? 
+```{r}
+# Create regression model
 Avg_mod <-
   Ny_data %>%
   lm(students ~ level_1 + level_2 + level_3 + level_4, data = .)  
 
-
+# View model
 summary(Avg_mod)
 
 ```
 
+The model provides evidence that all four levels of scoring contribute to the average score, as common sense suggests. When interpreting the model, the residuals are all very small values, meaning that there is little error in the calculation. This calculation shows that all levels influence the average score by the same positive amount. Regression models are great for more variant data, but are not good for closely knitted results like this as shown by the example model. 
+
+### Take easy, but less informative route to see the influence of each level
+```{r}
+mean(Ny_data$level_1_perc)
+mean(Ny_data$level_2_perc)
+mean(Ny_data$level_3_perc)
+mean(Ny_data$level_4_perc)
+
+```
 
 
 ```{r}
 
 Avg_tree <- 
 Ny_data %>% 
-  rpart(avg ~ level_1 + level_2 + level_3 + level_4, data = .)
+  rpart(avg ~ . , data = .)
 
 rpart.plot(Avg_tree, roundint = FALSE)
 

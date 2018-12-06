@@ -3,11 +3,12 @@ title: "Final Project"
 author: "Lauryn Pavlik"
 output: html_notebook
 ---
-# Explanation Of The Data Set
+# Explanation of the data set
 The data set that is being used in this analysis is taken from data.gov. This set evolved from math benchmark data in New York. It contains information such as average score, number of participants, how many students scored in each category, and the percent of students in each category. Level one is the lowest score range and level four is the highest. This data is collected from 32 districts and six grade levels over the course of six years. 
 
 ## Clean environment and load packages
 ```{r message = FALSE}
+
 # Clean up workspace environment
 rm(list = ls())
 
@@ -22,16 +23,19 @@ library(rpart)
 
 ## Import the data set and name it 
 ```{r message = FALSE}
-library(readr)
+# Get data
 New_york <- read_csv("final decision.csv")
 
+# View data table
 head(New_york)
+
 ```
 
-Here the table is not yet tidy, rows further down contain non-numerics in the grade column and all variable names need edited. 
+Here the table is not yet tidy because rows further down contain non-numerics in the grade column and all variable names need edited. 
 
 ## View and make data table tidy 
 ```{r warning = FALSE}
+
 # Rename the variables to accommodate style conventions
 Ny_data <- 
 New_york %>%
@@ -45,9 +49,8 @@ Ny_data$`Level 3+4 %` <- NULL
 Ny_data %>%
   remove(row = "All Grades")
 
+# View data table
 head(Ny_data)
-
-
 
 ```
 
@@ -88,7 +91,7 @@ Judging from the graph, it seems that females have a slightly higher benchmark s
 ## Using a hypothesis test, is there statistically significant evidence that females have higher scores than males? 
 Before we can move on with the test, it is safe to check and make sure there is the same total amount of males and females that have taken the benchmark. If the results are different, the test will not be reliable. 
 
-# Test counts
+### Test counts
 ```{r}
 Ny_data %>%
   group_by(sex) %>%
@@ -156,7 +159,7 @@ t.test(mu_1, mu_2)
 
 ```
 
-From this hypothesis test, a p value of 0.0003039 is produced. Since the p value is very small, the null hypothesis can be rejected and there is significant evidence produced, that females tend to have a greater average score on math benchmarks than males do. From this data, we are 95% confident that the average female score is about 1.22 points to 4.12 points higher than the male average score. 
+From this hypothesis test, a p-value of 0.0003039 is produced. Since the p-value is very small, the null hypothesis can be rejected and there is significant evidence produced that females tend to have a greater average score on math benchmarks than males do. From this data, we are 95% confident that the average female score is about 1.22 points to 4.12 points higher than the male average score. 
 
 
 ## Now that we know females score higher than males, it is time to question the levels of scoring
@@ -173,7 +176,7 @@ summary(Avg_mod)
 
 ```
 
-The model provides evidence that all four levels of scoring contribute to the average score, as common sense suggests. When interpreting the model, the residuals are all very small values, meaning that there is little error in the calculation. This calculation shows that all levels influence the average score by the same positive amount. Regression models are great for more variant data, but are not good for closely knitted results like this as shown by the example model. 
+The model's p-values provide evidence that all four levels of scoring contribute to the average score, as common sense suggests. When interpreting the model, the residuals are all very small values, meaning that there is little error in the calculation. This calculation shows that all levels influence the average score by the same positive amount. Regression models are great for more variant data, but are not good for closely knitted results like this as shown by the example model. 
 
 ### Take easy, but less informative route to see the influence of each level
 ```{r}
@@ -184,18 +187,23 @@ mean(Ny_data$level_4_perc)
 
 ```
 
+By taking the mean of the percents of the different levels, it is shown that 9.54% of students score in level one, 26.37% score in level two, 44.07% score in level three and 20.02% score in level four. It can be said that most students score in the level three zone. 
+
+## Predict average score based on the variables
+Say one knows the year, grade of the students and the percent of scores coming from each level, but needs to know the actual average score for a group of students. A regression tree is a good way to predict the average score. 
 
 ```{r}
-
+# Create regression tree
 Avg_tree <- 
 Ny_data %>% 
   rpart(avg ~ . , data = .)
 
+# Plot regression tree
 rpart.plot(Avg_tree, roundint = FALSE)
 
 
 ```
 
-
+The tree produces a model to help predict the average math benchmark score so, this would be helpful when not knowing a score for a group of students. For example, if the percent of level four scores is less than 6 and the year is 2010, we can predict the average score will be 664.
 
 

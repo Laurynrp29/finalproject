@@ -57,6 +57,27 @@ head(Ny_data)
 
 ## Ask questions to become familiar with the data set
 
+### What is the highest average score?
+```{r}
+# Create new data table with descending average score 
+High <- 
+Ny_data %>%
+  arrange(desc(avg))
+# View new data table 
+head(High)
+
+```
+It is observed that the highest score is 724 points.
+
+### What is the lowest average score?
+```{r}
+# See the last six rows of the descending table 
+
+tail(High)
+
+```
+It is observed that the lowest score is 614 points.
+
 ### Does the number of students taking the benchmark increase the average score? 
 ```{r}
 # Scatterplot 

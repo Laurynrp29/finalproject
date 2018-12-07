@@ -18,6 +18,7 @@ library(dplyr)
 library(ggplot2)
 library(rpart.plot)
 library(rpart)
+library(readr)
 
 ```
 
@@ -40,7 +41,7 @@ Here the table is not yet tidy because rows further down contain non-numerics in
 Ny_data <- 
 New_york %>%
  dplyr:: filter(Grade != "All Grades") %>%
-  rename(district = "District", grade = "Grade", year = "Year", avg = "Mean Scale Score", level_1 = "Level 1 #", level_1_perc = "Level 1 %", level_2 = "Level 2 #", level_2_perc = "Level 2 %", level_3 = "Level 3 #", level_3_perc = "Level 3 %", level_4 = "Level 4 #", level_4_perc = "Level 4 %", students = "Number Tested", sex = "Category")
+  rename(district = "District", grade = "Grade", year = "Year", avg = "Mean Scale Score", level_1 = "Level 1 #", level_1_perc = "Level 1 %", level_2 = "Level 2 #", level_2_perc = "Level 2 %", level_3 = "Level 3 #", level_3_perc = "Level 3 %", level_4 = "Level 4 #", level_4_perc = "Level 4 %", students = "Number Tested", sex = "Category") 
 
 # Remove repeated columns and non numeric inputs for quantitative variables
 Ny_data$`Level 3+4 #` <- NULL

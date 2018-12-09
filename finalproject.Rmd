@@ -3,10 +3,10 @@ title: "Final Project"
 author: "Lauryn Pavlik"
 output: html_notebook
 ---
-# Explanation of the data set
+# Background of The Data
 The data set that is being used in this analysis is taken from data.gov. This set evolved from math benchmark data in New York. It contains information such as average score, number of participants, how many students scored in each category, and the percent of students in each category. Level one is the lowest score range and level four is the highest. This data is collected from 32 districts and six grade levels over the course of six years. 
 
-## Clean environment and load packages
+## Clean Environment and Load Packages
 ```{r message = FALSE}
 
 # Clean up workspace environment
@@ -22,7 +22,7 @@ library(readr)
 
 ```
 
-## Import the data set and name it 
+## Import Data  
 ```{r message = FALSE}
 # Get data
 New_york <- read_csv("final decision.csv")
@@ -32,9 +32,18 @@ head(New_york)
 
 ```
 
-Here the table is not yet tidy because rows further down contain non-numerics in the grade column and all variable names need edited. 
+Here the table is not yet tidy because all variable names to need to be editied to fit the code style. 
 
-## View and make data table tidy 
+## Inspect Bottom of Data Table 
+```{r}
+# View last six rows
+tail(New_york)
+
+```
+
+By viewing the last six rows of the data table, one can see that the districts extend all the way to 32 and the year goes to 2011. Although, the data for the Grade variable does not contain a single grade level for each case. This is one of the many errors that will need tidying. 
+
+## Fix Data Table 
 ```{r warning = FALSE}
 
 # Rename the variables to accommodate style conventions
@@ -55,7 +64,7 @@ head(Ny_data)
 
 ```
 
-## Ask questions to become familiar with the data set
+## Ask Questions To Explore Data
 
 ### What is the highest average score?
 ```{r}
@@ -94,7 +103,7 @@ Ny_data %>%
 
 It can be observed that there is a slight postive correlation, but nothing signficant to the eye. 
 
-### Let's add more variables to see if there is any correlation between new variables  
+### Add More Variables   
 ```{r}
 # Scatterplot
 Ny_data %>% 

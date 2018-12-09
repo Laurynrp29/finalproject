@@ -24,10 +24,11 @@ library(readr)
 
 ## Import Data  
 ```{r message = FALSE}
+
 # Get data
 New_york <- read_csv("final decision.csv")
 
-# View data table
+# View top of the data table
 head(New_york)
 
 ```
@@ -57,12 +58,14 @@ Ny_data$`Level 3+4 #` <- NULL
 Ny_data$`Level 3+4 %` <- NULL
 
 Ny_data %>%
-  remove(row = "All Grades")
+  filter(grepl("All Grades", grade, ignore.case = TRUE))
 
 # View data table
-head(Ny_data)
+tail(Ny_data)
 
 ```
+
+By viewing the last six rows again, one can now see that the "All Grades" cases are removed and the table looks much more tidy. 
 
 ## Ask Questions To Explore Data
 
@@ -72,27 +75,29 @@ head(Ny_data)
 High <- 
 Ny_data %>%
   arrange(desc(avg))
+
 # View new data table 
 head(High)
 
 ```
-It is observed that the highest score is 724 points.
+
+It is observed that the highest average score is 724 points.
 
 ### What is the lowest average score?
 ```{r}
 # See the last six rows of the descending table 
-
 tail(High)
 
 ```
-It is observed that the lowest score is 614 points.
+
+It is observed that the lowest average score is 614 points.
 
 ### Does the number of students taking the benchmark increase the average score? 
 ```{r}
 # Scatterplot 
 Ny_data %>%
   ggplot(aes(x = students, y = avg)) + 
-  geom_point(aes(color = sex)) +
+  geom_point(aes(color = sex)) +       # Distinguish sex by color
   xlab("Number of Students") +
   ylab("Average Points Scored") +
   ggtitle("Average Score Overall")
@@ -121,9 +126,9 @@ Ny_data %>%
 Judging from the graph, it seems that females have a slightly higher benchmark score. It is also noticeable that the scores over the districts in the more recent years have less of a postive correlation. These observations bring about a question: 
 
 ## Using a hypothesis test, is there statistically significant evidence that females have higher scores than males? 
-Before we can move on with the test, it is safe to check and make sure there is the same total amount of males and females that have taken the benchmark. If the results are different, the test will not be reliable. 
+Before we can move on with the test, it is safe to check and make sure there is the same total amount of males and females that have taken the benchmark. If the results are different, the test will not be valid. 
 
-### Test counts
+### Inspect Counts
 ```{r}
 Ny_data %>%
   group_by(sex) %>%

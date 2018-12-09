@@ -33,7 +33,7 @@ head(New_york)
 
 ```
 
-Here the table is not yet tidy because all variable names to need to be editied to fit the code style. 
+Here the table is not yet tidy because all variable names need to be editied to fit the code style. 
 
 ## Inspect Bottom of Data Table 
 ```{r}
@@ -154,6 +154,7 @@ data.frame() %>%
   rename(female = "Female") %>% 
   drop_na(female)   # Remove any missing values for females 
 
+
 # Drop the four unneeded variables 
 F_score$district <- NULL
 F_score$grade <- NULL
@@ -174,6 +175,7 @@ data.frame() %>%
   spread(key = sex, value = avg) %>%  # Again, spread sex into seperate columns
   rename(male = "Male") %>%
   drop_na(male) # Remove missing values for males
+
 
 # Drop the four unneeded variables 
 M_score$district <- NULL
@@ -201,7 +203,7 @@ From this hypothesis test, a p-value of 0.0003039 is produced. Since the p-value
 
 ## Now that we know females score higher than males, it is time to question the levels of scoring
 
-### Does any level of scoring have a more significant impact than the rest on the average score? 
+### Does a specific level of scoring have a more significant impact than the rest on the average score? 
 ```{r}
 # Create regression model
 Avg_mod <-
@@ -215,8 +217,9 @@ summary(Avg_mod)
 
 The model's p-values provide evidence that all four levels of scoring contribute to the average score, as common sense suggests. When interpreting the model, the residuals are all very small values, meaning that there is little error in the calculation. This calculation shows that all levels influence the average score by the same positive amount. Regression models are great for more variant data, but are not good for closely knitted results like this as shown by the example model. 
 
-### Take easy, but less informative route to see the influence of each level
+### Take A Different Route
 ```{r}
+# Find the percent average of each level
 mean(Ny_data$level_1_perc)
 mean(Ny_data$level_2_perc)
 mean(Ny_data$level_3_perc)
@@ -226,7 +229,7 @@ mean(Ny_data$level_4_perc)
 
 By taking the mean of the percents of the different levels, it is shown that 9.54% of students score in level one, 26.37% score in level two, 44.07% score in level three and 20.02% score in level four. It can be said that most students score in the level three zone. 
 
-## Predict average score based on the variables
+## Predict Average Scores Based on the Variables
 Say one knows the year, grade of the students and the percent of scores coming from each level, but needs to know the actual average score for a group of students. A regression tree is a good way to predict the average score. 
 
 ```{r}

@@ -109,7 +109,8 @@ It can be observed that there is a slight postive correlation, but nothing signf
 Ny_data %>% 
   ggplot(aes(x = district, y = avg)) + 
   geom_point() +
-  facet_grid(sex ~ year) +  # Seperate data by year and by sex
+  facet_grid(sex ~ year) +   # Seperate data by year and by sex
+  geom_smooth(method = lm, color = "orange") +  # Add an orange smoother to see correlation
   xlab("District Number") +
   ylab("Average Points Scored") +
   ggtitle("Gender's Average Score Over The Years")
